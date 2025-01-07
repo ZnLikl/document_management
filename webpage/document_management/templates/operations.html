@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Operations{% endblock %}
+{% block content %}
+    <h2>User Operations</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Action</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for operation in operations %}
+                <tr>
+                    <td>{{ operation.user_id }}</td>
+                    <td>{{ operation.action }}</td>
+                    <td>{{ operation.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

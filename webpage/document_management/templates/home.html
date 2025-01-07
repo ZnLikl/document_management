@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h2>Welcome, {{ current_user.username }}!</h2>
+    New Document
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date Posted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in documents %}
+                <tr>
+                    <td>{{ document.title }}</td>
+                    <td>{{ document.date_posted.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <a href="{{ url_for('view_document', doc_id=document.id) }}" class="btn btn-primary">View</a>
+                        <a href="{{ url_for('edit_document', doc_id=document.id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ url_for('delete_document', doc_id=document.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

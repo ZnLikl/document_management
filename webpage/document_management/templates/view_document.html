@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Document - {{ document.title }}{% endblock %}
+{% block content %}
+    <h2>{{ document.title }}</h2>
+    <p><strong>Date Posted:</strong> {{ document.date_posted.strftime('%Y-%m-%d') }}</p >
+    <p>{{ document.content }}</p >
+    <div>
+        Edit
+        <form action="{{ url_for('delete_document', doc_id=document.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}
